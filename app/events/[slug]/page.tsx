@@ -108,10 +108,12 @@ export default async function EventPage({ params }: EventPageProps) {
 
         {/* Description */}
         <div className="mb-12">
-          <div 
-            className="prose prose-lg max-w-none text-gray-700"
-            dangerouslySetInnerHTML={{ __html: event.metadata.description }}
-          />
+          {event.metadata.description && (
+            <div 
+              className="prose prose-lg max-w-none text-gray-700"
+              dangerouslySetInnerHTML={{ __html: event.metadata.description }}
+            />
+          )}
         </div>
 
         {/* Registration CTA */}
@@ -162,7 +164,7 @@ export async function generateStaticParams() {
       })
       .props(['slug'])
 
-    return objects.map((event) => ({
+    return objects.map((event: { slug: string }) => ({
       slug: event.slug,
     }))
   } catch (error) {

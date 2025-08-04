@@ -152,7 +152,7 @@ export async function generateStaticParams() {
       })
       .props(['slug'])
 
-    return objects.map((staff) => ({
+    return objects.map((staff: { slug: string }) => ({
       slug: staff.slug,
     }))
   } catch (error) {

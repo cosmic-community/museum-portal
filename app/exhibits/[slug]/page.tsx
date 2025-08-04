@@ -98,10 +98,12 @@ export default async function ExhibitPage({ params }: ExhibitPageProps) {
 
         {/* Description */}
         <div className="mb-12">
-          <div 
-            className="prose prose-lg max-w-none text-gray-700"
-            dangerouslySetInnerHTML={{ __html: exhibit.metadata.description }}
-          />
+          {exhibit.metadata.description && (
+            <div 
+              className="prose prose-lg max-w-none text-gray-700"
+              dangerouslySetInnerHTML={{ __html: exhibit.metadata.description }}
+            />
+          )}
         </div>
 
         {/* Gallery */}
@@ -144,7 +146,7 @@ export async function generateStaticParams() {
       })
       .props(['slug'])
 
-    return objects.map((exhibit) => ({
+    return objects.map((exhibit: { slug: string }) => ({
       slug: exhibit.slug,
     }))
   } catch (error) {
